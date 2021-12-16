@@ -8,13 +8,19 @@ def main():
     all_roots = []
     if l_minimal <= r_maximum:
         for i in range(l_minimal, r_maximum + 1):
-            interval = [int(100000), int(-100000 + i)]
-            while interval[1] != 100000:
-                if discriminant(interval[0], interval[1]) is not None:
-                    all_roots.append(discriminant(interval[0], interval[1]))
-                interval[0] -= 1
-                interval[1] += 1
-        print(all_roots)
+            if i == -1:
+                all_roots.clear()
+                print(-1)
+                break
+            else:
+                interval = [100000, -100000 + i]
+                while interval[1] != 100000:
+                    if discriminant(interval[0], interval[1]) is not None:
+                        all_roots.append(discriminant(interval[0], interval[1]))
+                    interval[0] -= 1
+                    interval[1] += 1
+        if len(all_roots) != 0:
+            print(all_roots, "\n", len(all_roots))
         print("--- %s seconds ---" % (time.time() - start_time))
     else:
         print("l_minimal > r_maximum")
